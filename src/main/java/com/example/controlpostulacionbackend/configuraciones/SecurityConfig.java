@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("https://documentos.pol.una.py/","http://10.13.90.213","http://10.13.90.213:8080", "http://localhost:4200"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("https://documentos.pol.una.py","http://10.13.90.213","http://10.13.90.213:8080", "http://localhost:4200"));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
 

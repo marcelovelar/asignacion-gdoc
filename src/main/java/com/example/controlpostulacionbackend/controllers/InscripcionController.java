@@ -61,6 +61,9 @@ public class InscripcionController {
     @Autowired
     private TipoEstadoDocumentoRepository tipoEstadoDocumentoRepository;
 
+    @Autowired
+    private AuditoriaRepository auditoriaRepository;
+
     @GetMapping("/persona/{personaid}")
     public List<Inscripcion> obtenerInscripcionesPorPersonaid(@PathVariable("personaid") Short personaid) {
         return inscripcionService.obtenerInscripcionesPorPersonaid(personaid);
@@ -652,6 +655,13 @@ public class InscripcionController {
             // Manejar cualquier excepción que pueda ocurrir durante la actualización del documento
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el documento de inscripción: " + e.getMessage());
         }
+    }
+
+    //PARA TRAER LA AUDITORIA DEL DOCUMENTO
+    @GetMapping("/auditoriaDocumento/{documentoInscripcionId}")
+    public ResponseEntity<List<Auditoria>> obtenerAuditoriaDocumentoInscripcionList(@PathVariable Long documentoInscripcionId) {
+        List<Auditoria> auditoriaList = auditoriaRepository.findByDocumentoInscripcionId(documentoInscripcionId);
+        return ResponseEntity.ok(auditoriaList);
     }
 
 }
