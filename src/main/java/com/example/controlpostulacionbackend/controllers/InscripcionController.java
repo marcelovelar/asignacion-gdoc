@@ -4,6 +4,7 @@ import com.example.controlpostulacionbackend.DTO.*;
 import com.example.controlpostulacionbackend.entidades.*;
 import com.example.controlpostulacionbackend.repositorio.*;
 import com.example.controlpostulacionbackend.servicios.InscripcionService;
+import com.example.controlpostulacionbackend.servicios.InscriptosService;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -22,6 +23,10 @@ import java.util.Optional;
 @RequestMapping("/inscripciones")
 @CrossOrigin(origins = {"http://localhost:4200", "http://10.13.90.213", "http://10.13.90.213:8080","https://documentos.pol.una.py"})
 public class InscripcionController {
+
+    @Autowired
+    private InscriptosService inscriptosService;
+
     @Autowired
     private InscripcionService inscripcionService;
 
@@ -64,6 +69,15 @@ public class InscripcionController {
     @Autowired
     private AuditoriaRepository auditoriaRepository;
 
+    @GetMapping("/details")
+    public List<InscriptosDTO> getInscripcionDetails() {
+        return inscriptosService.getInscripcionDetails();
+    }
+
+    @PutMapping("/{id}/inscripciongdoc")
+    public int updateNroGdoc(@PathVariable Short id, @RequestBody InscripcionUpdateDTO request) {
+        return inscriptosService.updateInscripciongdoc(id, request.getInscripciongdoc());
+    }
     @GetMapping("/persona/{personaid}")
     public List<Inscripcion> obtenerInscripcionesPorPersonaid(@PathVariable("personaid") Short personaid) {
         return inscripcionService.obtenerInscripcionesPorPersonaid(personaid);

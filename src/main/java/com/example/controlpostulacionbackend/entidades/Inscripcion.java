@@ -103,6 +103,17 @@ public class Inscripcion implements Serializable {
     @Column(name = "inscripcioncertificadofunciona")
     private byte[] inscripcionCertificadoFunciona;
 
+    @Column(name = "inscripciongdoc", length = 40)
+    private String inscripciongdoc;
+
+    public String getInscripciongdoc() {
+        return inscripciongdoc;
+    }
+
+    public void setInscripciongdoc(String inscripciongdoc) {
+        this.inscripciongdoc = inscripciongdoc;
+    }
+
     // Getters and Setters
     public Short   getInscripcionId() {
         return inscripcionId;
